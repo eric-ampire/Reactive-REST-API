@@ -3,6 +3,7 @@ package org.pbreakers.dmospring.web
 import org.pbreakers.dmospring.dao.TransactionRepository
 import org.pbreakers.dmospring.entities.Transaction
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -14,6 +15,11 @@ class TransactionReactiveReactiveRestController : ReactiveRestController<Transac
 
     @GetMapping(value = "/transactions")
     override fun findAll(): Flux<Transaction> {
+        return transactionRepository.findAll()
+    }
+
+    @GetMapping(value = "/streamTransactions", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun findAllStream(): Flux<Transaction> {
         return transactionRepository.findAll()
     }
 
