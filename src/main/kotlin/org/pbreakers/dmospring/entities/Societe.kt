@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 @NoArgsConstructor
 data class Societe(
-    @Id var id: String,
-    var nom: String,
-    var prix: Double
+    @Id var id: String = "",
+    var nom: String = "",
+    var prix: Double = 0.0
 )
