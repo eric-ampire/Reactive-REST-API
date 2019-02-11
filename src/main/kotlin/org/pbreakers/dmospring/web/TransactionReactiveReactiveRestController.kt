@@ -1,6 +1,7 @@
 package org.pbreakers.dmospring.web
 
 import org.pbreakers.dmospring.dao.TransactionRepository
+import org.pbreakers.dmospring.entities.Societe
 import org.pbreakers.dmospring.entities.Transaction
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -26,6 +27,12 @@ class TransactionReactiveReactiveRestController : ReactiveRestController<Transac
     @GetMapping(value = "/transactions/{id}")
     override fun findOne(id: String): Mono<Transaction> {
         return transactionRepository.findById(id)
+    }
+
+    @GetMapping(value = "/transactionBySociete/{id}")
+    fun findTransactionBySoc(@PathVariable id: String): Flux<Transaction> {
+        val societe = Societe(id = id)
+        return transactionRepository.findBySociete(societe)
     }
 
     @DeleteMapping(value = "/transactions/{id}")
